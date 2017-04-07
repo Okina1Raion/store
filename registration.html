@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>registration</title>
+	<meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function check(s, type) {
+                switch (type) {
+                    case 'login':
+                        $.ajax({
+                            url: "check.php",
+                            async: true,
+                            type: "POST",
+                            data: {
+                                login: s
+                            },
+                            success: function (result) {
+                                typeof result;
+                                if (result == true) {
+                                    //$('@login').css('border-color' : 'green');
+                                    alert('true');
+                                }
+                                else {
+                                    //$('@login').css('border-color' : 'red');
+                                    alert('false');
+                                }
+                            }
+                        });
+                        break;
+                    case 'email':
+                        $.ajax({
+                            url: "check.php",
+                            async: true,
+                            type: "POST",
+                            data: {
+                                email: s
+                            },
+                            success: function (result) {
+                                if (result == true) {
+                                    //$('@login').css('border-color' : 'green');
+                                    alert('true');
+                                }
+                                else {
+                                    //$('@login').css('border-color' : 'red');
+                                    alert('false');
+                                }
+                            }
+                        });
+                        break;
+                }
+            }
+    </script>
+</head>
+<body>
+	<form method="POST" action="registration.php">
+		<input type="text" name="name" placeholder="ФИО">
+        <input type="text" onclick="check(this.value,'login')" name="login" placeholder="Логин">
+        <input type="text" name="telephone" placeholder="Телефонный номер">
+        <input type="text" onclick="check(this.value,'email')" name="email" placeholder="Электронный адресс">
+        <input type="password" name="password" placeholder="Пароль">
+        <input type="password" name="password" placeholder="Повторите пароль">
+        <input type="submit">
+    </form>
+</body>
+
+</html>
